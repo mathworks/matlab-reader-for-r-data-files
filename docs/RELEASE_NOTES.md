@@ -14,7 +14,7 @@ Initial release of MATLAB&reg; Reader for R&reg; Data Files.
 - Include an interactive Getting Started guide and searchable HTML help.
 
 Requires MATLAB R2025a or later. Supports uncompressed/gzip binary XDR and
-native serialization, versions 2 and 3. See [README.md](README.md) for the
+native serialization, versions 2 and 3. See [README.md](../README.md) for the
 support matrix and limitations, and [COMPATIBILITY.md](COMPATIBILITY.md) for
 validation details.
 

@@ -26,6 +26,6 @@ returned components as a substitute for an equivalent validated model.
 
 There is no generic conversion from an R fitted model to an executable
 prediction model. The supported data conversions are listed in
-[README.md](README.md).
+[README.md](../README.md).
 
 <!-- Copyright 2026 The MathWorks, Inc. -->

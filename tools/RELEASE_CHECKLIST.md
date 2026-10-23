@@ -1,6 +1,7 @@
 # Release Checklist
 
-Use this checklist before tagging a release.
+Use this checklist before tagging a release. Paths are relative to the
+repository root.
 
 ## Scope
 
@@ -19,7 +20,7 @@ Use this checklist before tagging a release.
 
 - Run each example in `tbx/doc`.
 - Check `README.md` getting-started instructions from a fresh MATLAB session.
-- Check `TROUBLESHOOTING.md` for the current public error identifiers.
+- Check `docs/TROUBLESHOOTING.md` for the current public error identifiers.
 - Confirm copyright notices are present in source and documentation files.
 - Confirm first prominent product-name uses are trademark marked in public
   documentation.

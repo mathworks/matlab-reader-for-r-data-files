@@ -49,7 +49,8 @@ downloaded smoke test runs separately without coverage instrumentation.
 
 On R2025a, use a disposable source checkout: this command creates a local
 project because that release cannot open TOML project definitions. CI tests
-R2025a and R2026b on Windows and Linux. See [COMPATIBILITY.md](COMPATIBILITY.md).
+R2025a and R2026b on Windows and Linux. See
+[compatibility and validation](docs/COMPATIBILITY.md).
 
 For a release build in R2026b:
 
@@ -86,8 +87,9 @@ contains the files needed to test and reproduce a release:
 | Path | Purpose |
 | --- | --- |
 | `tbx/` | Reader functions and installed documentation |
+| `docs/` | Repository guides, release notes, and the overview diagram |
 | `tests/` | Regression tests, fixture generators, and validation downloads |
-| `tools/` | Build/validation helpers, the Contents template, and Python build requirements |
+| `tools/` | Build/validation helpers, release checklist, Contents template, and Python build requirements |
 | `buildfile.m` | Build-tool entry point for testing and packaging |
 | `matlab.toml` | Development project paths and test folders |
 | `.github/` | Automated tests, release publishing, and dependency updates |
@@ -101,11 +103,13 @@ Contents.m is installed with the toolbox.
 
 ## Model object scope
 
-[MODEL_ADAPTERS.md](MODEL_ADAPTERS.md) describes the current limits of model
+[Model object support](docs/MODEL_ADAPTERS.md) describes the current limits of model
 data import. Validate changes to that behavior against the originating
 application, with explicit class/version and missing-value coverage.
 
 ## Handoff Checklist
+
+Use the [release checklist](tools/RELEASE_CHECKLIST.md) before tagging a release.
 
 - run `buildtool test`
 - update the README support matrix when behavior changes

@@ -7,7 +7,7 @@ Import serialized R&reg; data files into MATLAB&reg; without running R during
 import. Read analytical data as arrays, strings, categoricals, dates, tables,
 and dictionaries, with metadata for missing values and R attributes.
 
-![R file formats converted to MATLAB values](media/rdata-import.svg)
+![R file formats converted to MATLAB values](docs/media/rdata-import.svg)
 
 ## Install
 
@@ -78,12 +78,13 @@ See [Getting Started](tbx/doc/getting-started.md) and the function reference:
   `PreserveUnsupported="opaque"` provides diagnostic placeholders;
   `"raw"` exposes an unstable internal representation for diagnostics only.
 - Fitted model objects do not become executable prediction models. See
-  [model adapter scope](MODEL_ADAPTERS.md).
+  [model adapter scope](docs/MODEL_ADAPTERS.md).
 - Files are processed in memory. Large compressed files can require
   substantially more memory than their on-disk size.
 
-See [compatibility and validation](COMPATIBILITY.md) and
-[troubleshooting](TROUBLESHOOTING.md).
+See [compatibility and validation](docs/COMPATIBILITY.md),
+[troubleshooting](docs/TROUBLESHOOTING.md), and
+[release notes](docs/RELEASE_NOTES.md).
 
 ## Development and testing
 

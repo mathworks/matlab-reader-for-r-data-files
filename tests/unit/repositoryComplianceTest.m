@@ -20,7 +20,7 @@ classdef repositoryComplianceTest < matlab.unittest.TestCase
                 "SECURITY.md", ...
                 "README.md", ...
                 "DEVELOPMENT.md", ...
-                fullfile("media", "rdata-import.svg")];
+                fullfile("docs", "media", "rdata-import.svg")];
             missingFiles = requiredFiles(~isfile(fullfile( ...
                 testCase.ProjectRoot, requiredFiles)));
 
@@ -70,9 +70,9 @@ classdef repositoryComplianceTest < matlab.unittest.TestCase
 
         function testReadmeVisualIsAccessible(testCase)
             readme = fileread(fullfile(testCase.ProjectRoot, "README.md"));
-            diagram = fileread(fullfile(testCase.ProjectRoot, "media", "rdata-import.svg"));
+            diagram = fileread(fullfile(testCase.ProjectRoot, "docs", "media", "rdata-import.svg"));
             testCase.verifySubstring(readme, ...
-                "![R file formats converted to MATLAB values](media/rdata-import.svg)")
+                "![R file formats converted to MATLAB values](docs/media/rdata-import.svg)")
             testCase.verifySubstring(diagram, "Copyright 2026 The MathWorks, Inc.")
             testCase.verifySubstring(diagram, "<title")
             testCase.verifySubstring(diagram, "<desc")
@@ -82,9 +82,9 @@ classdef repositoryComplianceTest < matlab.unittest.TestCase
             readmeText = string(fileread(fullfile( ...
                 testCase.ProjectRoot, "README.md")));
             modelText = string(fileread(fullfile( ...
-                testCase.ProjectRoot, "MODEL_ADAPTERS.md")));
+                testCase.ProjectRoot, "docs", "MODEL_ADAPTERS.md")));
             releaseText = string(fileread(fullfile( ...
-                testCase.ProjectRoot, "RELEASE_CHECKLIST.md")));
+                testCase.ProjectRoot, "tools", "RELEASE_CHECKLIST.md")));
             benchmarkText = string(fileread(fullfile( ...
                 testCase.ProjectRoot, "tests", "performance", "README.md")));
 
