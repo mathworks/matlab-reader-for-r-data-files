@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="340" viewBox="0 0 1100 340" role="img" aria-labelledby="title desc">
+  <title id="title">Import R data files into MATLAB</title>
+  <desc id="desc">RDS and RData files are parsed without running R. Vectors, factors, dates, data frames, and lists become MATLAB arrays, categoricals, datetimes, tables, and dictionaries. Metadata records missing-value masks and R attributes.</desc>
+  <metadata>Copyright 2026 The MathWorks, Inc.</metadata>
+  <rect width="1100" height="340" rx="12" fill="#f4f6f8"/>
+  <rect x="28" y="32" width="275" height="216" rx="10" fill="white" stroke="#bbb"/>
+  <text font-family="Roboto, Arial, sans-serif" font-size="23" font-weight="300" fill="#242424" x="50" y="72">R® data files</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="18" fill="#242424" x="50" y="113">RDS: one object</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="18" fill="#242424" x="50" y="147">RData / RDA: workspace</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="16" fill="#555" x="50" y="193">Binary serialization v2 / v3</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="16" fill="#555" x="50" y="220">Uncompressed or gzip</text>
+  <path d="M315 139h49m-12-10 12 10-12 10" fill="none" stroke="#555" stroke-width="3"/>
+  <rect x="378" y="66" width="264" height="150" rx="10" fill="white" stroke="#555" stroke-width="2"/>
+  <text font-family="Roboto, Arial, sans-serif" font-size="23" font-weight="300" fill="#242424" x="405" y="109">Read and convert</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="18" fill="#242424" x="405" y="148">readrds · readrdata</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="18" fill="#242424" x="405" y="182">rdata2table · rdatainfo</text>
+  <path d="M656 139h49m-12-10 12 10-12 10" fill="none" stroke="#555" stroke-width="3"/>
+  <rect x="720" y="32" width="352" height="216" rx="10" fill="white" stroke="#bbb"/>
+  <text font-family="Roboto, Arial, sans-serif" font-size="23" font-weight="300" fill="#242424" x="742" y="72">MATLAB® values</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="18" fill="#242424" x="742" y="113">Arrays · strings · categoricals</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="18" fill="#242424" x="742" y="147">Datetimes · durations</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="18" fill="#242424" x="742" y="181">Tables · timetables</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="18" fill="#242424" x="742" y="215">Dictionaries · cells</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="18" fill="#242424" x="30" y="287">Metadata preserves R attributes and missing-value masks.</text>
+  <text font-family="Roboto, Arial, sans-serif" font-size="16" fill="#555" x="30" y="315">No R runtime is needed for importing.</text>
+</svg>

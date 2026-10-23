@@ -1,0 +1,57 @@
+# Copyright 2026 The MathWorks, Inc.
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish ${{ github.ref_name }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate release tag
+        shell: bash
+        run: |
+          [[ "${GITHUB_REF_NAME}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Set up Python for static help
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install help build dependency
+        run: python -m pip install -r requirements-build.txt
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v3
+        with:
+          release: R2026b
+
+      - name: Build toolbox
+        uses: matlab-actions/run-build@v3
+        env:
+          RDATAREADER_VERSION: ${{ github.ref_name }}
+        with:
+          tasks: archive
+
+      - name: Verify packaged content
+        run: python tools/verify_package.py releases/rDataReader.mltbx
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: releases/rDataReader.mltbx
+          fail_on_unmatched_files: true
+          generate_release_notes: true

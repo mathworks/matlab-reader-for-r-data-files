@@ -1,0 +1,14 @@
+# Copyright 2026 The MathWorks, Inc.
+name = "matlab-reader-for-r-data-files"
+
+[folders]
+path = [
+    "tbx/rdatareader",
+    "tbx/doc",
+    "tests",
+]
+test = [
+    "tests/unit",
+    "tests/integration",
+    "tests/performance",
+]

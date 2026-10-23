@@ -1,0 +1,10 @@
+/* Copyright 2026 The MathWorks, Inc. */
+body { font: 16px/1.6 Roboto, Arial, sans-serif; color: #242424; background: #fff;
+  max-width: 960px; margin: 2rem auto; padding: 0 2rem; }
+h1, h2, h3 { line-height: 1.25; font-weight: 300; color: #004b87; }
+a { color: #0076a8; }
+pre { background: #f4f6f8; padding: 1rem; overflow-x: auto; }
+code { font-family: Menlo, Consolas, monospace; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #ccc; padding: .5rem; text-align: left; }
+th { background: #eef3f6; }
