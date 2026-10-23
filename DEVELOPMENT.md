@@ -60,7 +60,7 @@ buildtool archive
 ```
 
 Before building, install the static-help dependency with
-`python -m pip install -r requirements-build.txt`. The build runs the full
+`python -m pip install -r tools/requirements-build.txt`. The build runs the full
 test suite and static analysis, generates help locally, and creates
 `releases/rDataReader.mltbx`. Python&reg; and markdown-it-py are build dependencies
 only. Generated help uses this repository's stylesheet; no converter code,
@@ -77,6 +77,27 @@ Check the actual archive with
 `python tools/verify_package.py releases/rDataReader.mltbx`.
 The tag workflow verifies the archive, creates the GitHub&reg; release, and attaches the package. Test
 reports are workflow artifacts; GitHub Pages is not required.
+
+## Repository layout
+
+The installer contains the reader and its help. The source repository also
+contains the files needed to test and reproduce a release:
+
+| Path | Purpose |
+| --- | --- |
+| `tbx/` | Reader functions and installed documentation |
+| `tests/` | Regression tests, fixture generators, and validation downloads |
+| `tools/` | Build/validation helpers, the Contents template, and Python build requirements |
+| `buildfile.m` | Build-tool entry point for testing and packaging |
+| `matlab.toml` | Development project paths and test folders |
+| `.github/` | Automated tests, release publishing, and dependency updates |
+| `.gitignore` | Excludes generated files and downloaded data from source control |
+| `.gitattributes` | Consistent text line endings across platforms |
+
+`tools/Contents.inc` is a build template, not a file that users run. The release
+build stamps it with the version/date to create `tbx/rdatareader/Contents.m`,
+which provides MATLAB's function and version listing. Only the generated
+Contents.m is installed with the toolbox.
 
 ## Model object scope
 

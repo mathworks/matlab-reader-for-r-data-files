@@ -28,7 +28,7 @@ end
 
 function generatecontentsTask(~)
 projectRoot = currentProject().RootFolder;
-templateFile = fullfile(projectRoot, "Contents.inc");
+templateFile = fullfile(projectRoot, "tools", "Contents.inc");
 contentsFile = fullfile(projectRoot, "tbx", "rdatareader", "Contents.m");
 version = releaseVersion();
 dateText = string(datetime("today", Format="dd-MMM-yyyy", Locale="en_US"));
@@ -118,7 +118,7 @@ command = rdata.test.quoteCommandArgument(python) + " " + ...
 [status, output] = system(command);
 if status ~= 0
     error("rdata:HelpBuild", ...
-        "Static help failed. Install requirements-build.txt.\n%s", output)
+        "Static help failed. Install tools/requirements-build.txt.\n%s", output)
 end
 % Remove stale converter assets from earlier builds before packaging.
 resourceFolder = fullfile(docRoot, "resources");

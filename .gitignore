@@ -1,57 +1,32 @@
 # Copyright 2026 The MathWorks, Inc.
 
-# Autosave files
+# Local editor and operating-system files
 *.asv
 *.m~
 *.autosave
-*.slx.r*
-*.mdl.r*
-
-# Derived content-obscured files
-*.p
-
-# Compiled MEX files
-*.mex*
-
-# Packaged app and toolbox files
-*.mlappinstall
-*.mltbx
-
-# Deployable archives
-*.ctf
-
-# Generated helpsearch folders
-helpsearch*/
-
-# Code generation folders
-slprj/
-sccprj/
-codegen/
-
-# Cache files
-*.slxc
-
-# Cloud based storage dotfile
-.MATLABDriveTag
-
-# OS and editor byproducts
+*.tmp
 .DS_Store
 Thumbs.db
-*.tmp
+.MATLABDriveTag
 
+# Build reports, packages, and caches
 public/
 releases/
-tests/testdata/corpus/
-tests/testdata/synthetic/
-tbx/rdatareader/Contents.m
-
-tbx/doc/resources
-tbx/doc/*.html
-tbx/doc/*.xml
-
-.buildtool
+.buildtool/
+*.mltbx
 __pycache__/
 *.pyc
+
+# Generated or downloaded test data
+tests/testdata/corpus/
+tests/testdata/synthetic/
+
+# Generated toolbox files and HTML help
+tbx/rdatareader/Contents.m
 tbx/LICENSE.txt
 tbx/SECURITY.md
+tbx/doc/*.html
+tbx/doc/*.xml
+tbx/doc/resources/
+tbx/doc/helpsearch*/
 tbx/doc/mfiles/*.html

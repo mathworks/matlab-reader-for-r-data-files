@@ -1,6 +1,6 @@
 # MATLAB Reader for R Data Files
 
-[Open in MATLAB Online&trade;](https://matlab.mathworks.com/open/github/v1?repo=mathworks/matlab-reader-for-r-data-files)
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/matlab-reader-for-r-data-files)
 [![Tests](https://github.com/mathworks/matlab-reader-for-r-data-files/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/mathworks/matlab-reader-for-r-data-files/actions/workflows/test.yml)
 
 Import serialized R&reg; data files into MATLAB&reg; without running R during
