@@ -5,20 +5,29 @@ on:
   push:
     tags:
       - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to validate without publishing (for example v0.1.0)"
+        required: true
+        default: "v0.1.0"
+        type: string
 
 permissions:
   contents: write
 
 jobs:
   release:
-    name: Build and publish ${{ github.ref_name }}
+    name: Build ${{ inputs.version || github.ref_name }}
     runs-on: ubuntu-latest
+    env:
+      RDATAREADER_VERSION: ${{ inputs.version || github.ref_name }}
 
     steps:
-      - name: Validate release tag
+      - name: Validate build version
         shell: bash
         run: |
-          [[ "${GITHUB_REF_NAME}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "${RDATAREADER_VERSION}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
 
       - name: Check out repository
         uses: actions/checkout@v7
@@ -27,7 +36,7 @@ jobs:
         uses: r-lib/actions/setup-r@v2
 
       - name: Set up Python for static help
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -41,15 +50,22 @@ jobs:
 
       - name: Build toolbox
         uses: matlab-actions/run-build@v3
-        env:
-          RDATAREADER_VERSION: ${{ github.ref_name }}
         with:
           tasks: archive
 
       - name: Verify packaged content
         run: python tools/verify_package.py releases/rDataReader.mltbx
 
+      - name: Upload validation package
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v7
+        with:
+          name: toolbox-validation
+          path: releases/rDataReader.mltbx
+          if-no-files-found: error
+
       - name: Create GitHub release
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v3
         with:
           files: releases/rDataReader.mltbx

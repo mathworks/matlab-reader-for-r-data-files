@@ -79,6 +79,13 @@ Check the actual archive with
 The tag workflow verifies the archive, creates the GitHub&reg; release, and attaches the package. Test
 reports are workflow artifacts; GitHub Pages is not required.
 
+To validate changes to release tooling, manually run the **Release** workflow
+and supply a version such as `v0.1.0`. A manual run exercises Python setup, the
+full toolbox build, and package verification, then uploads a `toolbox-validation`
+artifact. It does not create or update a release. Only a version-tag push
+publishes the package. The ordinary **Test** workflow does not exercise the
+Python setup step used for release builds.
+
 ## Repository layout
 
 The installer contains the reader and its help. The source repository also
