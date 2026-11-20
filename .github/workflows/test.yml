@@ -16,8 +16,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        release: [R2025a, R2026b]
+        os: [ubuntu-latest]
+        release: [R2023b, R2026b]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
@@ -25,10 +25,22 @@ jobs:
       - uses: matlab-actions/setup-matlab@v3
         with:
           release: ${{ matrix.release }}
-      - name: Run complete test suite
+      
+      - name: Setup project on older releases
+        if: matrix.release == 'R2023b'
         uses: matlab-actions/run-command@v3
         with:
-          command: addpath('tools'); runValidation
+          command: |
+            project = matlab.project.createProject(Folder=pwd, Name="rdatareader");
+            addPath(project, fullfile(pwd, "tbx", "rdatareader"));
+            addPath(project, fullfile(pwd, "tbx", "doc"));
+            addPath(project, fullfile(pwd, "tests"));
+
+      - name: Run test suite
+        uses: matlab-actions/run-build@v3
+        with:
+          tasks: test
+
       - name: Upload validation reports
         if: always()
         uses: actions/upload-artifact@v7

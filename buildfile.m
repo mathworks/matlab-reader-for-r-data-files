@@ -3,15 +3,22 @@ function plan = buildfile
 
 import matlab.buildtool.tasks.*
 import matlab.unittest.selectors.*
+import matlab.unittest.TestSuite
 
 plan = buildplan(localfunctions);
 
 plan("clean") = CleanTask;
 plan("check") = CodeIssuesTask;
-plan("test") = TestTask("./tests", ...
+
+suite = TestSuite.fromFolder("tests", ~HasTag("Slow"), ...
+    IncludingSubfolders=true);
+testFiles = unique(fullfile(string({suite.BaseFolder}), ...
+    string({suite.TestClass}) + ".m"));
+testFiles = matlab.buildtool.io.FileCollection.fromPaths(testFiles);
+
+plan("test") = TestTask(testFiles, ...
     SourceFiles = "tbx/rdatareader", ...
     TestResults= "public/testresults.html", ...
-    Selector = ~HasTag("Slow"), ...
     CodeCoverageResults= ["public/coverage.xml", "public/coverage.html"]);
 
 plan("testall") = TestTask("./tests", ...
@@ -20,7 +27,6 @@ plan("testall") = TestTask("./tests", ...
 
 plan("archive").Dependencies = ["generatecontents", "testall", "check", "doc"];
 plan("archive").Outputs = fullfile("releases", "rDataReader.mltbx");
-plan("archive").Inputs = ["tbx", "README.md", "LICENSE.txt", "SECURITY.md", "buildfile.m"];
 
 plan.DefaultTasks = ["check" "test"];
 
@@ -52,13 +58,15 @@ end
 function archiveTask(~)
 projectRoot = currentProject().RootFolder;
 packageRoot = fullfile(projectRoot, "tbx");
-supportFiles = ["LICENSE.txt", "SECURITY.md"];
-for k = 1:numel(supportFiles)
-    copyfile(fullfile(projectRoot, supportFiles(k)), packageRoot)
-end
 
 opts = matlab.addons.toolbox.ToolboxOptions(packageRoot, ...
     "246c70da-75ae-49a6-a15d-2867a43eb24a");
+
+% md removal
+mdfiles = dir( fullfile('tbx', 'doc', '*.md') );
+[~,idx] = ismember( fullfile( {mdfiles.folder}, {mdfiles.name}), opts.ToolboxFiles);
+opts.ToolboxFiles(idx) = [];
+
 opts.AuthorCompany = "MathWorks";
 opts.AuthorEmail = "stheakst@mathworks.com";
 opts.AuthorName = "Stuart Theakston";
@@ -67,28 +75,17 @@ opts.Summary = "Import serialized R data files without running R.";
 opts.PackageName = "rdatareader";
 opts.ToolboxName = "MATLAB Reader for R Data Files";
 opts.ToolboxVersion = releaseVersion();
-opts.MinimumMatlabRelease = "R2025a";
+opts.MinimumMatlabRelease = "R2023a";
 opts.Readme = fullfile(packageRoot, "README.md");
 opts.ToolboxGettingStartedGuide = fullfile(packageRoot, "doc", "mfiles", "GettingStarted.m");
 opts.ToolboxMatlabPath = [fullfile(packageRoot, "rdatareader"), fullfile(packageRoot, "doc")];
 
-% Package only runtime code, authored help, generated help, and support files.
-% An explicit list prevents stale downloads or build artifacts from shipping.
-runtimeFiles = dir(fullfile(packageRoot, "rdatareader", "**", "*.m"));
-docFiles = [dir(fullfile(packageRoot, "doc", "*.md")); ...
-    dir(fullfile(packageRoot, "doc", "*.html")); ...
-    dir(fullfile(packageRoot, "doc", "*.xml")); ...
-    dir(fullfile(packageRoot, "doc", "*.css"))];
-guideFile = fullfile(packageRoot, "doc", "mfiles", "GettingStarted.m");
-searchFiles = dir(fullfile(packageRoot, "doc", "helpsearch-v*", "**", "*"));
-searchFiles = searchFiles(~[searchFiles.isdir]);
-files = [runtimeFiles; docFiles; searchFiles];
-opts.ToolboxFiles = [string(fullfile({files.folder}, {files.name})), ...
-    guideFile, opts.Readme, fullfile(packageRoot, supportFiles)];
 if ~isfolder(fullfile(projectRoot, "releases"))
     mkdir(fullfile(projectRoot, "releases"))
 end
+
 matlab.addons.toolbox.packageToolbox(opts)
+
 end
 
 function version = releaseVersion()

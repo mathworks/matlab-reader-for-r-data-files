@@ -1,6 +1,6 @@
 # Compatibility and Validation
 
-The runtime reader requires MATLAB&reg; R2025a or later. It uses MATLAB only;
+The runtime reader requires MATLAB&reg; R2023a or later. It uses MATLAB only;
 R&reg; is used for development fixtures and oracle comparisons. The TOML
 project, help generation, and toolbox build require R2026b.
 
