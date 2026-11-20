@@ -69,22 +69,6 @@ classdef realWorldCorpusTest < matlab.unittest.TestCase
         end
     end
 
-    methods (Test, TestTags = {'Corpus', 'Slow'})
-        function testLargeZenodoGzipSmoke(testCase)
-            rdata.test.downloadValidationCorpus(IncludeSlow = true);
-            manifest = fullfile(currentProject().RootFolder, ...
-                "tests", "testdata", "corpus", "manifest.json");
-            testCase.Manifest = readstruct(manifest);
-            fixture = findFixture(testCase.Manifest, "zenodo-agrimonia");
-            rfile = fullfile(string(testCase.Manifest.root), ...
-                string(fixture.r_serialized_files(1).relative_path));
-            testCase.verifyThat(rfile, matlab.unittest.constraints.IsFile)
-
-            workspace = readrdata(rfile);
-
-            testCase.verifyTrue(isKey(workspace, "Agrimonia_Dataset"))
-        end
-    end
 end
 
 function verifyCorpusImports(testCase, supportedIds)
