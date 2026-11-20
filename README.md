@@ -14,9 +14,6 @@ and dictionaries, with metadata that records missing values and R attributes.
 Requires MATLAB R2023a or later. No R, Java&reg;, or Git&trade;
 installation is required at runtime.
 
-The R2023a minimum applies to source checkouts and packages built from this
-revision. The published v0.1.1 toolbox requires R2025a or later.
-
 For MATLAB R2026b or later, install directly from MATLAB with:
 
 ```matlab
@@ -39,7 +36,7 @@ For earlier supported releases, open the downloaded `.mltbx` file in MATLAB to
 install it.
 
 To use a source checkout, clone the repository and add `tbx/rdatareader` to
-the path. Opening the TOML development project requires MATLAB R2026b.
+the path.
 
 ## Import your first table
 
