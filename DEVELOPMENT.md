@@ -68,14 +68,19 @@ only. Generated help uses this repository's stylesheet; no converter code,
 third-party CSS, or JavaScript is packaged. Set `RDATA_PYTHON` if the Python
 executable is not named `python` on PATH.
 
-The archive explicitly includes runtime code, help, `LICENSE.txt`, and
-`SECURITY.md`. Generated/downloaded datasets and test code are excluded.
+The archive explicitly includes runtime code, help, `README.md`, `LICENSE.txt`,
+and `SECURITY.md`. The help build generates the package README from the
+repository README and resolves its relative links to public URLs. Packaging
+sets `ToolboxOptions.Readme` to that included file so File Exchange can read
+the package description. Generated/downloaded datasets and test code are excluded.
 Never save third-party numeric output into the distributed Getting Started
 Live Script. Help generation does not execute examples. Run examples locally
 to validate them without saving their output.
 
 Check the actual archive with
 `python tools/verify_package.py releases/rDataReader.mltbx`.
+This checks the included README, its package metadata reference, and its links
+as well as the runtime, help, license, and security files.
 The tag workflow verifies the archive, creates the GitHub&reg; release, and attaches the package. Test
 reports are workflow artifacts; GitHub Pages is not required.
 

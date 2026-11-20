@@ -30,6 +30,9 @@ repository root.
   third-party data output.
 - Inspect the built toolbox for the license, security statement, and generated
   HTML help. Confirm test fixtures and converter resources are excluded.
+- Confirm the built toolbox contains a nonempty `README.md` and its package
+  metadata names that file. Check that README links work outside the source
+  checkout. A README on the repository page alone does not satisfy this check.
 - Check that package metadata and README both require R2025a or later.
 - Run the complete suite and record exact builds in the release validation
   report. Confirm all jobs in the platform/release CI matrix pass.

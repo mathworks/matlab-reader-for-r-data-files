@@ -4,13 +4,41 @@
 from html import escape
 from pathlib import Path
 import re
+from urllib.parse import quote, unquote, urlsplit
 import xml.etree.ElementTree as ET
 
 from markdown_it import MarkdownIt
 
 
+def build_package_readme(root):
+    """Reuse the repository README with links that work outside its checkout."""
+    text = (root / "README.md").read_text(encoding="utf-8")
+    for match in re.finditer(r"(!?)\[[^\]\n]*\]\(([^)\s]+)\)", text):
+        image, target = match.groups()
+        url = urlsplit(target)
+        if url.scheme or url.netloc or not url.path:
+            continue
+        source = (root / unquote(url.path)).resolve()
+        relative = source.relative_to(root.resolve()).as_posix()
+        assert source.is_file(), f"Missing README link target: {target}"
+        base = (
+            "https://raw.githubusercontent.com/mathworks/matlab-reader-for-r-data-files/main/"
+            if image else
+            "https://github.com/mathworks/matlab-reader-for-r-data-files/blob/main/"
+        )
+        destination = base + quote(relative)
+        if url.query:
+            destination += "?" + url.query
+        if url.fragment:
+            destination += "#" + url.fragment
+        text = text.replace(f"]({target})", f"]({destination})")
+    (root / "tbx" / "README.md").write_text(text, encoding="utf-8")
+
+
 def build_help():
-    root = Path(__file__).resolve().parents[1] / "tbx" / "doc"
+    repository = Path(__file__).resolve().parents[1]
+    build_package_readme(repository)
+    root = repository / "tbx" / "doc"
     markdown = MarkdownIt("commonmark", {"html": True}).enable("table")
     for source in sorted(root.glob("*.md")):
         text = source.read_text(encoding="utf-8")

@@ -20,7 +20,7 @@ plan("testall") = TestTask("./tests", ...
 
 plan("archive").Dependencies = ["generatecontents", "testall", "check", "doc"];
 plan("archive").Outputs = fullfile("releases", "rDataReader.mltbx");
-plan("archive").Inputs = ["tbx", "LICENSE.txt", "SECURITY.md", "buildfile.m"];
+plan("archive").Inputs = ["tbx", "README.md", "LICENSE.txt", "SECURITY.md", "buildfile.m"];
 
 plan.DefaultTasks = ["check" "test"];
 
@@ -68,6 +68,7 @@ opts.PackageName = "rdatareader";
 opts.ToolboxName = "MATLAB Reader for R Data Files";
 opts.ToolboxVersion = releaseVersion();
 opts.MinimumMatlabRelease = "R2025a";
+opts.Readme = fullfile(packageRoot, "README.md");
 opts.ToolboxGettingStartedGuide = fullfile(packageRoot, "doc", "mfiles", "GettingStarted.m");
 opts.ToolboxMatlabPath = [fullfile(packageRoot, "rdatareader"), fullfile(packageRoot, "doc")];
 
@@ -83,7 +84,7 @@ searchFiles = dir(fullfile(packageRoot, "doc", "helpsearch-v*", "**", "*"));
 searchFiles = searchFiles(~[searchFiles.isdir]);
 files = [runtimeFiles; docFiles; searchFiles];
 opts.ToolboxFiles = [string(fullfile({files.folder}, {files.name})), ...
-    guideFile, fullfile(packageRoot, supportFiles)];
+    guideFile, opts.Readme, fullfile(packageRoot, supportFiles)];
 if ~isfolder(fullfile(projectRoot, "releases"))
     mkdir(fullfile(projectRoot, "releases"))
 end

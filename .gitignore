@@ -25,6 +25,7 @@ tests/testdata/synthetic/
 tbx/rdatareader/Contents.m
 tbx/LICENSE.txt
 tbx/SECURITY.md
+tbx/README.md
 tbx/doc/*.html
 tbx/doc/*.xml
 tbx/doc/resources/
