@@ -26,17 +26,17 @@ jobs:
         with:
           release: ${{ matrix.release }}
       
-      - name: Run complete test suite
+      - name: Setup project on older releases
         if: matrix.release == 'R2023b'
         uses: matlab-actions/run-command@v3
         with:
           command: |
-            project = matlab.project.createProject(Folder=root, Name="rdatareader");
+            project = matlab.project.createProject(Folder=pwd, Name="rdatareader");
             addPath(project, fullfile(root, "tbx", "rdatareader"));
             addPath(project, fullfile(root, "tbx", "doc"));
             addPath(project, fullfile(root, "tests"));
 
-      - name: Run build
+      - name: Run test suite
         uses: matlab-actions/run-build@v3
         with:
           tasks: test
