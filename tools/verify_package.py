@@ -53,7 +53,7 @@ def verify_package(filename):
                 assert "%[output:" not in text and '"outputData"' not in text, name
         requirements = ET.fromstring(archive.read("metadata/systemRequirements.xml"))
         release = requirements.find("{*}releaseCompatibility")
-        assert release is not None and release.get("start") == "R2025a", "Wrong minimum release"
+        assert release is not None and release.get("start") == "R2023a", "Wrong minimum release"
         properties = ET.fromstring(archive.read("metadata/coreProperties.xml"))
         version = properties.find("{*}version").text
         info = {"package": Path(filename).name, "version": version,
