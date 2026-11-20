@@ -6,16 +6,6 @@ project, help generation, and toolbox build require R2026b.
 
 ## Validation matrix
 
-The current CI matrix covers R2023a on Ubuntu 22.04 and Windows Server 2022,
-and R2025a and R2026b on the current Ubuntu and Windows runners. Each job runs
-the complete source suite and verifies installation and imports using the
-toolbox built by the same workflow. Check the latest
-[Test workflow](https://github.com/mathworks/matlab-reader-for-r-data-files/actions/workflows/test.yml)
-for current results.
-
-R2023a support applies to source checkouts and newly built packages. Published
-versions through v0.1.1 retain their original R2025a package requirement.
-
 The version 0.1.0 GitHub&reg; validation passed on Windows&reg; and Linux&reg;
 with released R2025a and R2026b builds on 23 October 2026:
 
@@ -32,7 +22,7 @@ These results describe version 0.1.0; check the latest workflow run for later
 changes.
 
 Run `addpath("tools"); runValidation` from a source checkout to generate
-`public/validation.json`, JUnit results, and coverage XML. Before R2026b use a
+`public/validation.json`, JUnit results, and coverage XML. On R2025a use a
 disposable checkout, because the helper creates a local project definition.
 
 ## Format coverage

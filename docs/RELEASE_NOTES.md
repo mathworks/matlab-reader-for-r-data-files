@@ -1,12 +1,5 @@
 # Release Notes
 
-## Unreleased
-
-- Add R2023a compatibility validation on Windows and Linux, including toolbox
-  installation and imports outside a source checkout.
-- Set the minimum release for newly built packages to R2023a.
-- Document installation through File Exchange and the package manager.
-
 ## 0.1.1
 
 - Include the README and its package metadata reference in the toolbox for
