@@ -32,9 +32,9 @@ jobs:
         with:
           command: |
             project = matlab.project.createProject(Folder=pwd, Name="rdatareader");
-            addPath(project, fullfile(root, "tbx", "rdatareader"));
-            addPath(project, fullfile(root, "tbx", "doc"));
-            addPath(project, fullfile(root, "tests"));
+            addPath(project, fullfile(pwd, "tbx", "rdatareader"));
+            addPath(project, fullfile(pwd, "tbx", "doc"));
+            addPath(project, fullfile(pwd, "tests"));
 
       - name: Run test suite
         uses: matlab-actions/run-build@v3
