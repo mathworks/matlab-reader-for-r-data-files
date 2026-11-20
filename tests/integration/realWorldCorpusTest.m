@@ -13,7 +13,7 @@ classdef realWorldCorpusTest < matlab.unittest.TestCase
             manifest = fullfile(currentProject().RootFolder, ...
                 "tests", "testdata", "corpus", "manifest.json");
             testCase.verifyThat(manifest, matlab.unittest.constraints.IsFile)
-            testCase.Manifest = readstruct(manifest);
+            testCase.Manifest = jsondecode(fileread(manifest));
         end
     end
 
@@ -74,7 +74,7 @@ classdef realWorldCorpusTest < matlab.unittest.TestCase
             rdata.test.downloadValidationCorpus(IncludeSlow = true);
             manifest = fullfile(currentProject().RootFolder, ...
                 "tests", "testdata", "corpus", "manifest.json");
-            testCase.Manifest = readstruct(manifest);
+            testCase.Manifest = jsondecode(fileread(manifest));
             fixture = findFixture(testCase.Manifest, "zenodo-agrimonia");
             rfile = fullfile(string(testCase.Manifest.root), ...
                 string(fixture.r_serialized_files(1).relative_path));
