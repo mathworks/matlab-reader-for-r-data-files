@@ -1,18 +1,18 @@
 # Release Notes
 
-## v0.1.2
+## 0.1.2
 
 - Release compatibility updates
 - File Exchange installation options added to README
 
-## v0.1.1
+## 0.1.1
 
 - Include the README and its package metadata reference in the toolbox for
   File Exchange publication.
 - Make packaged README links work outside the source checkout.
 - Verify README content and metadata before publishing a package.
 
-## v0.1.0
+## 0.1.0
 
 Initial release of MATLAB&reg; Reader for R&reg; Data Files.
 
