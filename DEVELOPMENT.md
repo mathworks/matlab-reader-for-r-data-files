@@ -47,15 +47,10 @@ results = runValidation;
 This runs each test once. Coverage is measured on the fast suite; the large
 downloaded smoke test runs separately without coverage instrumentation.
 
-Before R2026b, use a disposable source checkout: this command creates a local
-project because those releases cannot open TOML project definitions. CI tests
-R2023a, R2025a, and R2026b on Windows and Linux. See
+On earlier versions, use a disposable source checkout: this command creates a local
+project because that release cannot open TOML project definitions. CI tests
+R2025a and R2026b on Windows and Linux. See
 [compatibility and validation](docs/COMPATIBILITY.md).
-
-The Test workflow first builds and verifies a toolbox with validation version
-0.0.0. Each matrix job then runs the full source suite and, in a fresh MATLAB
-session, installs that toolbox and imports synthetic fixtures without source
-folders on the path. Validation packages are workflow artifacts, not releases.
 
 For a release build in R2026b:
 

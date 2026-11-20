@@ -38,7 +38,7 @@ if ~isfolder(options.OutputFolder)
     mkdir(options.OutputFolder)
 end
 
-archiveCache = dictionary(strings(0, 1), strings(0, 1));
+archiveCache = configureDictionary("string", "string");
 try
     fprintf("Preparing validation corpus in %s\n", options.OutputFolder)
     for k = 1:numel(entries)

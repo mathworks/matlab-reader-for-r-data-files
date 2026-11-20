@@ -55,7 +55,7 @@ def build_help():
 
     info = ET.Element("productinfo")
     for key, value in {
-        "matlabrelease": "R2023a",
+        "matlabrelease": "R2025a",
         "name": "MATLAB Reader for R Data Files",
         "type": "toolbox",
         "icon": "$toolbox/matlab/icons/bookicon.gif",

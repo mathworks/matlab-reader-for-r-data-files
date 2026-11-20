@@ -33,8 +33,7 @@ repository root.
 - Confirm the built toolbox contains a nonempty `README.md` and its package
   metadata names that file. Check that README links work outside the source
   checkout. A README on the repository page alone does not satisfy this check.
-- Check that package metadata and README both require R2023a or later.
-- Confirm the CI package installs and imports its fixtures on R2023a.
+- Check that package metadata and README both require R2025a or later.
 - Run the complete suite and record exact builds in the release validation
   report. Confirm all jobs in the platform/release CI matrix pass.
 - For each model adapter, verify the documented R class, package and version
