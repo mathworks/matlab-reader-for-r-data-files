@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ubuntu-latest
+        os: [ubuntu-latest]
         release: [R2025a, R2026b]
     runs-on: ${{ matrix.os }}
     steps:
