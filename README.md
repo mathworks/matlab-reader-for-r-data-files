@@ -3,34 +3,45 @@
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mathworks/matlab-reader-for-r-data-files)
 [![Tests](https://github.com/mathworks/matlab-reader-for-r-data-files/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/mathworks/matlab-reader-for-r-data-files/actions/workflows/test.yml)
 
-Import serialized R&reg; data files into MATLAB&reg; without running R during
-import. Read analytical data as arrays, strings, categoricals, dates, tables,
-and dictionaries, with metadata for missing values and R attributes.
+Import serialized R&reg; data files directly into MATLAB&reg; without running R.
+Convert R objects to MATLAB arrays, strings, categoricals, datetimes, tables,
+and dictionaries, with metadata that records missing values and R attributes.
 
 ![R file formats converted to MATLAB values](docs/media/rdata-import.svg)
 
 ## Install
 
-Requires MATLAB R2025a or later. No separate R, Java&reg;, or Git&trade;
+Requires MATLAB R2023a or later. No R, Java&reg;, or Git&trade;
 installation is required at runtime.
 
-Download **[rDataReader.mltbx from the latest release](https://github.com/mathworks/matlab-reader-for-r-data-files/releases/latest/download/rDataReader.mltbx)**,
-then open the downloaded file in MATLAB or run:
+For MATLAB R2026b or later, install directly from MATLAB with:
 
 ```matlab
-matlab.addons.install("rDataReader.mltbx")
+mpminstall rdatareader
 ```
 
-To use a source checkout instead, add its runtime folder:
+For all supported releases, you can also install **MATLAB Reader for R Data Files**
+through Add-On Explorer or find it on
+[File Exchange](https://www.mathworks.com/matlabcentral/fileexchange/?term=rdatareader).
+
+To install manually, download the latest
+[rDataReader.mltbx](https://github.com/mathworks/matlab-reader-for-r-data-files/releases/latest/download/rDataReader.mltbx).
+In MATLAB R2026b or later, install the downloaded file with:
 
 ```matlab
-addpath(fullfile(pwd, "tbx", "rdatareader"))
+mpminstall("path/to/rDataReader.mltbx")
 ```
+
+For earlier supported releases, open the downloaded `.mltbx` file in MATLAB to
+install it.
+
+To use a source checkout in MATLAB R2026b or later, clone the repository and
+add `tbx/rdatareader` to the path.
 
 ## Import your first table
 
-This example downloads public economic data from the AER package when run.
-The repository and toolbox do not include downloaded data or saved output.
+This example downloads and imports public economic data from the R package AER.
+The repository and toolbox do not include these data or saved example output.
 
 ```matlab
 url = "https://raw.githubusercontent.com/cran/AER/master/data/OECDGrowth.rda";
@@ -39,7 +50,7 @@ T = webread(url, options);
 head(T)
 ```
 
-For local files:
+To read local files or inspect their metadata:
 
 ```matlab
 value = readrds("data.rds");
@@ -55,24 +66,25 @@ See [Getting Started](tbx/doc/getting-started.md) and the function reference:
 
 | R data | MATLAB representation |
 | --- | --- |
-| Logical, integer, real, complex, and raw vectors | Logical, double, complex, and uint8 arrays; optional int32 integers |
-| Character vectors | Strings; optional cell arrays of character vectors |
-| Matrices and arrays | Arrays with the R dimensions |
-| Factors and ordered factors | Categoricals with levels and ordering |
-| Date, POSIXct, and difftime values | Datetimes and durations |
-| Data frames and tibble-like objects | Tables; optional timetables through rdata2table |
-| Named lists and workspaces | Dictionaries with original R names |
+| Logical, integer, real, complex, and raw vectors | Logical, double, complex, and `uint8` arrays; integers optionally stored as `int32` |
+| Character vectors | String arrays; optional cell arrays of character vectors |
+| Matrices and arrays | Arrays that preserve the R dimensions |
+| Factors and ordered factors | Categorical arrays that preserve levels and ordering |
+| Date, POSIXct, and difftime values | `datetime` and `duration` arrays |
+| Data frames and tibble-like objects | Tables; optional timetables through `rdata2table` |
+| Named lists and workspaces | Dictionaries that preserve the original R names |
 | Unnamed lists | Cell arrays |
 
 - Reads `.rds`, `.rda`, and `.RData` files using binary XDR or native binary
-  serialization, versions 2 and 3. Supports uncompressed and gzip files.
+  serialization (versions 2 and 3). Supports uncompressed and gzip-compressed files.
 - ASCII serialization and bzip2, xz, and zstd compression are not supported.
-- Duplicate names are rejected explicitly. Table columns with empty, missing,
+- Duplicate names are rejected. Table columns with empty, missing,
   or reserved names (`:`, `Properties`, `Row`, `Variables`) are rejected.
   Other names, including spaces and punctuation, are preserved unchanged.
 - R missing logical values become `false`; use metadata to distinguish them.
-  `TextType="cellstr"` collapses missing and empty strings. `IntegerType="int32"`
-  retains the R NA sentinel. See [missing-value details](tbx/doc/readrds.md).
+  With `TextType="cellstr"`, missing and empty strings both become empty character
+  vectors. With `IntegerType="int32"`, missing integers retain the R NA sentinel.
+  See [missing-value details](tbx/doc/readrds.md).
 - Functions, environments, formulas, promises, bytecode, external pointers,
   and unsupported class-specific behavior are not reconstructed or executed.
   `PreserveUnsupported="opaque"` provides diagnostic placeholders;
@@ -88,19 +100,20 @@ See [compatibility and validation](docs/COMPATIBILITY.md),
 
 ## Development and testing
 
-The development project and release build require MATLAB R2026b, plus Rscript
-for generated fixtures and oracle tests. From the repository root:
+The development project and release build require MATLAB R2026b. Generating
+test fixtures and running oracle tests also require `Rscript`. To run the
+default test suite, start from the repository root:
 
 ```matlab
 openProject("matlab.toml")
 buildtool test
 ```
 
-Run `buildtool testall` for the complete suite. CI retains test and coverage
+Run `buildtool testall` for the complete suite. CI saves test and coverage
 reports as workflow artifacts. See [DEVELOPMENT.md](DEVELOPMENT.md) for release
 builds and testing on the minimum runtime release.
 
-External pull requests are not being accepted. Report reproducible bugs through
+External pull requests are currently not accepted. Report reproducible bugs through
 [GitHub&reg; issues](https://github.com/mathworks/matlab-reader-for-r-data-files/issues).
 For security vulnerabilities, follow [SECURITY.md](SECURITY.md).
 

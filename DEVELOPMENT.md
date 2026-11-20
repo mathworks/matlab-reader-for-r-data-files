@@ -6,7 +6,7 @@ data files. Keep changes aligned with the support matrix in `README.md`.
 ## Development Setup
 
 Use MATLAB R2026b for the TOML project and release build. Runtime importing
-supports R2025a and later. From the repository root:
+supports R2023a and later. From the repository root:
 
 ```matlab
 openProject("matlab.toml")
@@ -47,7 +47,7 @@ results = runValidation;
 This runs each test once. Coverage is measured on the fast suite; the large
 downloaded smoke test runs separately without coverage instrumentation.
 
-On R2025a, use a disposable source checkout: this command creates a local
+On earlier versions, use a disposable source checkout: this command creates a local
 project because that release cannot open TOML project definitions. CI tests
 R2025a and R2026b on Windows and Linux. See
 [compatibility and validation](docs/COMPATIBILITY.md).
